@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Header from './components/Header'
 import './App.css';
+import Cart from './components/Cart';
+import Customize from './components/Customize';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component {
+  state = {
+    selected: {
+      Processor: {
+        name: '17th Generation Intel Core HB (7 Core with donut spare)',
+        cost: 700
+      },
+      'Operating System': {
+        name: 'Ubuntu Linux 16.04',
+        cost: 200
+      },
+      'Video Card': {
+        name: 'Toyota Corolla 1.5v',
+        cost: 1150.98
+      },
+      Display: {
+        name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
+        cost: 1500
+      }
+    }
+  };
+
+
+  updateFeature = (feature, newValue) => {
+    const selected = Object.assign({}, this.state.selected);
+    selected[feature] = newValue;
+    this.setState({
+      selected
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <main>
+          <Customize cartData={this.state.selected} featureData={this.props.features}/>
+          <Cart cartData={this.state.selected}/>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;

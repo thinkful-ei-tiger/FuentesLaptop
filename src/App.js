@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/Header'
 import './App.css';
-import Cart from './components/Cart';
 import Customize from './components/Customize';
+import Summary from './components/Summary'
 
 
 
@@ -42,8 +42,12 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <Customize cartData={this.state.selected} featureData={this.props.features}/>
-          <Cart cartData={this.state.selected}/>
+          <Customize 
+          selected={this.state.selected} 
+          updateFeature={this.updateFeature}
+          features={this.props.features}/>
+          <Summary 
+          selected={this.state.selected}/>
         </main>
       </div>
     );
